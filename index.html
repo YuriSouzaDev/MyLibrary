@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="shortcut icon" href="./assets/img/books.png" type="image/x-icon">
+
+</head>
+
+<body>
+    <form id="form">
+        <h1>Add New Book</h1>
+        <div class="input">
+            <label for="inTitle">
+                Book title*
+                <input type="text" name="inTitle" id="inTitle">
+                <p class="error-message" id="titleError">Please, fill the camp</p>
+            </label>
+        </div>
+        <div class="input">
+            <label for="inAuthor">
+                Book author*
+                <input type="text" name="inAuthor" id="inAuthor">
+                <p class="error-message" id="authorError">Please, fill the camp</p>
+            </label>
+        </div>
+        <div class="input">
+            <label for="inPages">
+                Number of pages*
+                <input type="text" name="inPages" id="inPages">
+                <p class="error-message" id="pagesError">Please, fill the camp</p>
+            </label>
+        </div>
+        <div class="input">
+            <label for="inYear">
+                Publishing year*
+                <input type="text" name="inYear" id="inYear">
+                <p class="error-message" id="yearError">Please, fill the camp</p>
+            </label>
+        </div>
+        <div class="input-radio">
+            <h3>Já foi lido?*</h3>
+            <label for="isRead">
+                <input type="radio" name="inRead" id="isRead">Foi lido
+            </label>
+            <label for="notRead">
+                <input type="radio" name="inRead" id="notRead"> Não foi lido
+            </label>
+            <p class="error-message" id="readError">Please, fill the camp</p>
+        </div>
+        <button>Adicionar Livro</button>
+    </form>
+
+
+    <div class="header">
+        <h1>Book Library</h1>
+    </div>
+
+
+
+    <section class="book-container">
+        <article class="book-card">
+            <div>
+                <h2 class="title">"Harry Potter and the Philosopher's Stoneaaaaaaaaaaaaaaaaa"</h2>
+                <p class="year">1949</p>
+            </div>
+            <div>
+                <p class="author">By: George Orwell</p>
+                <p class="pages">Number of pages: 328</p>
+            </div>
+            <!-- <p>Already read</p> -->
+        </article>
+
+        <article class="book-card">
+            <div>
+                <h2 class="title">"Harry Potter and the Philosopher's Stone"</h2>
+                <p class="year">1949</p>
+            </div>
+            <div>
+                <p class="author">By: George Orwell</p>
+                <p class="pages">Number of pages: 328</p>
+            </div>
+            <!-- <p>Already read</p> -->
+        </article>
+
+        <article class="book-card">
+            <div>
+                <h2 class="title">"Harry Potter and the Philosopher's Stone"</h2>
+                <p class="year">1949</p>
+            </div>
+            <div>
+                <p class="author">By: George Orwell</p>
+                <p class="pages">Number of pages: 328</p>
+            </div>
+            <!-- <p>Already read</p> -->
+        </article>
+
+        <article class="book-card">
+            <div>
+                <h2 class="title">"Harry Potter and the Philosopher's Stone"</h2>
+                <p class="year">1949</p>
+            </div>
+            <div>
+                <p class="author">By: George Orwell</p>
+                <p class="pages">Number of pages: 328</p>
+            </div>
+            <!-- <p>Already read</p> -->
+        </article>
+
+    </section>
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
