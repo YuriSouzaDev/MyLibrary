@@ -31,7 +31,7 @@ Book.prototype.readStatus = function () {
 };
 
 // funtion para validacao de inputs
-function validateForm(validate) {
+function validateForm() {
   const title = form.inTitle.value;
   const author = form.inAuthor.value;
   const pages = form.inPages.value;
@@ -45,66 +45,73 @@ function validateForm(validate) {
   const yearError = document.querySelector("#yearError");
   const readError = document.querySelector("#readError");
 
-  validate = true;
+  let isValid = true;
+  // Verifica a data atual para validacao
   const now = new Date();
   const currentYear = now.getFullYear();
 
+  // validacao do titulo
   if (title.trim() === "") {
     titleError.style.color = "red";
-    validate = false;
+    isValid = false;
   } else if (title.length > 41 || title.length === 0) {
     titleError.innerHTML = "Please, insert between 1 - 40 characters";
     titleError.style.color = "red";
-    validate = false;
+    isValid = false;
   } else {
     titleError.style.color = "#f7efe5";
   }
 
+  // validacao do autor
   if (author.trim() === "") {
     authorError.style.color = "red";
-    validate = false;
+    isValid = false;
   } else if (author.length > 20 || author.length === 0) {
     authorError.innerHTML = "Please, insert between 1 - 20 characters";
     authorError.style.color = "red";
-    validate = false;
+    isValid = false;
   } else {
     authorError.style.color = "#f7efe5";
   }
 
+  // validacao de pages
   if (pages.trim() === "") {
     pagesError.style.color = "red";
-    validate = false;
+    isValid = false;
   } else if (pages.length > 5 || pages.length === 0) {
     pagesError.innerHTML = "Please, insert between 1 - 5 digits";
     pagesError.style.color = "red";
-    validate = false;
+    isValid = false;
   } else {
     pagesError.style.color = "#f7efe5";
   }
 
+  // validacao do ano
   if (year.trim() === "") {
     yearError.style.color = "red";
-    validate = false;
+    isValid = false;
   } else if (year.length < 4 || year.length > 4) {
     yearError.innerHTML = "Please, insert 4 digits";
     yearError.style.color = "red";
-    validate = false;
+    isValid = false;
   } else if (year > currentYear) {
-    yearError.innerHTML = `Please, insert a date less then ${currentYear}`;
+    yearError.innerHTML = `Please, insert a date less then ${year}`;
     yearError.style.color = "red";
-    validate = false;
+    isValid = false;
   } else {
     yearError.style.color = "#f7efe5";
   }
 
+  // validacao do read button
   if (!isReadInput.checked && !notReadInput.checked) {
     readError.style.color = "red";
-    validate = false;
+    isValid = false;
   } else {
     readError.style.color = "#f7efe5";
   }
 
-  if (validate) {
+  // Verifica a variavel
+  if (isValid) {
     addBookToLibrary();
     closeModal();
   }
@@ -139,7 +146,9 @@ function createBook(book) {
   <p class="author">By: ${book.author}</p>
   <p class="pages">Number of pages: ${book.pages}</p>
   </div>
-  <button class="${!book.read ? "not-Read" : ""}"}>${book.readStatus()}</button>
+  <button class="button-read ${
+    !book.read ? "not-Read" : ""
+  }"}>${book.readStatus()}</button>
   </article>`;
 
   bookContainer.innerHTML += bookCard;
@@ -147,27 +156,43 @@ function createBook(book) {
 
 form.addEventListener("submit", handleSubmit);
 
-const buttonNewBook = document.querySelector(".newBook");
+// Modal
+const buttonNewBook = document.querySelector(".newBook button");
 const modal = document.querySelector(".modal");
 const buttonCloseModal = document.querySelector(".close-modal");
+const body = document.querySelector("body");
 
-function resetErrorColors() {
-  const errorMessage = document.querySelectorAll(".error-message");
-
-  errorMessage.forEach((error) => {
-    error.style.color = "#f7efe5";
-  });
-}
-
+// Abre o modal do form
 function handleModal() {
   modal.style.display = "flex";
-  resetErrorColors();
+
+  // bloqueia o scroll ao abrir o modal
+  document.body.classList.add("scroll-lock");
 }
 
 buttonNewBook.addEventListener("click", handleModal);
 
+// Fecha o modal do form
 function closeModal() {
   modal.style.display = "none";
+
+  // desbloqueia o scroll ao abrir o modal
+  document.body.classList.remove("scroll-lock");
 }
 
 buttonCloseModal.addEventListener("click", closeModal);
+
+// button de read
+const buttonRead = document.querySelectorAll(".button-read");
+
+function handleCheck() {
+  buttonRead.classList.toggle("ativo");
+}
+
+buttonRead.forEach((item) => {
+  ["touchstart", "click"].forEach((userEvent) => {
+    item.addEventListener(userEvent, (event) => {
+      handleCheck(event);
+    });
+  });
+});

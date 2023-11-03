@@ -9,6 +9,10 @@
   box-sizing: border-box;
 }
 
+.scroll-lock {
+  overflow: hidden;
+}
+
 .header {
   width: 100%;
   height: 40vh;
@@ -230,7 +234,7 @@ input[type="radio"] {
   font-weight: 700;
 }
 
-.book-card button {
+.book-card .button-read {
   padding: 16px 12px;
   width: 200px;
   margin-top: 20px;
@@ -244,15 +248,15 @@ input[type="radio"] {
   transition: 0.3s;
 }
 
-.book-card button:hover {
+.book-card .button-read:hover {
   background: #224535;
 }
 
-.book-card button.not-Read {
+.book-card .button-read.not-Read {
   background: #db2d43;
   color: #fbf9af;
 }
 
-.book-card button.not-Read:hover {
+.book-card .button-read.not-Read:hover {
   background: #fa0559;
 }
