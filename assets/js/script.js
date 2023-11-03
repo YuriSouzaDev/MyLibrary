@@ -20,7 +20,6 @@ const Book = function (title, author, pages, year) {
   this.year = year;
 };
 
-/* Alterar para check unico este status */
 // Prototype para verificar se já foi lido
 Book.prototype.readStatus = function () {
   if (this.read) {
@@ -29,6 +28,11 @@ Book.prototype.readStatus = function () {
     return "Não foi lido";
   }
 };
+
+// verifica se o titulo ja existe
+function isBookAlreadyInLibrary(title) {
+  return myLibrary.some((book) => book.title === title);
+}
 
 // funtion para validacao de inputs
 function validateForm() {
@@ -44,8 +48,10 @@ function validateForm() {
   const pagesError = document.querySelector("#pagesError");
   const yearError = document.querySelector("#yearError");
   const readError = document.querySelector("#readError");
+  const errorBook = document.querySelector(".error-book");
 
   let isValid = true;
+
   // Verifica a data atual para validacao
   const now = new Date();
   const currentYear = now.getFullYear();
@@ -108,6 +114,13 @@ function validateForm() {
     isValid = false;
   } else {
     readError.style.color = "#f7efe5";
+  }
+
+  if (isBookAlreadyInLibrary(title)) {
+    errorBook.style.color = "red";
+    isValid = false;
+  } else {
+    errorBook.style.color = "#f7efe5";
   }
 
   // Verifica a variavel

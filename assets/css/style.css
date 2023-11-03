@@ -180,6 +180,12 @@ input[type="text"] {
   color: #f7efe5;
 }
 
+.error-book {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #f7efe5;
+}
+
 input[type="radio"] {
   margin-right: 0.2rem;
 }
