@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Griffy&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 *,
 *::before,
@@ -9,13 +9,9 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: #f7efe5;
-}
-
 .header {
-  width: 100vw;
-  height: 300px;
+  width: 100%;
+  height: 40vh;
   background: linear-gradient(180deg, hsla(0, 0%, 12%, 0.5) 0%, #1f1f1f 100%),
     url("../img/background-header.jpg") no-repeat center center;
   background-size: cover;
@@ -23,19 +19,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 60px;
 }
 
 .header::before {
   content: "";
   background: url("../img/books.png") no-repeat center center;
-
   background-size: cover;
   width: 100px;
   height: 100px;
   position: absolute;
-  top: 250px;
-  left: calc((100% - 1090px) / 2 + 40px);
+  top: 320px;
+  left: calc((100% - 1400px) / 2 + 40px);
 }
 
 .header h1 {
@@ -44,11 +38,102 @@ body {
   font-size: 8rem;
 }
 
-.input {
-  margin-bottom: 0.8rem;
+.newBook {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
 }
 
-.input-radio label {
+.newBook button {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  background: #5b0888;
+  border-radius: 0.4rem;
+  color: #e5cff7;
+  cursor: pointer;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.7);
+  transition: 0.3s;
+}
+
+.newBook button:hover {
+  background: #713abe;
+}
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background: rgba(216, 180, 248, 0.2);
+  position: fixed;
+  z-index: 999;
+  display: none;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  max-width: 400px;
+  background: #f7efe5;
+  height: max-content;
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid #222;
+  transform: scale(0);
+  animation: bookAnimation 0.7s forwards;
+}
+
+@keyframes bookAnimation {
+  to {
+    transform: scale(1);
+  }
+}
+
+#form button {
+  padding: 16px 12px;
+  border: none;
+  background: #5b0888;
+  border-radius: 0.4rem;
+  color: #e5cff7;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+}
+
+.close-modal {
+  place-self: end;
+  margin-right: 20px;
+  font-size: 1.5rem !important;
+  color: #222 !important;
+  font-weight: bold;
+  width: 0%;
+  cursor: pointer;
+  /* background: none !important; */
+  padding: 0 !important;
+}
+
+.input-radio > div {
+  display: flex;
+  gap: 10px;
+}
+
+.input-radio > div > div {
   display: inline-block;
 }
 
@@ -57,28 +142,57 @@ body {
   display: block;
 }
 
+.input-radio h3 {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+
+.input-radio label {
+  font-size: 1rem;
+}
+
 input[type="text"],
 label,
 button {
   display: block;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+}
+
+input[type="text"] {
+  padding: 5px;
+  width: 300px;
+}
+
+.input label {
+  font-weight: 600;
 }
 
 .error-message {
-  font-size: 0.875rem;
-  color: white;
-  margin-bottom: 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #f7efe5;
 }
 
 input[type="radio"] {
-  margin-right: 0.4rem;
+  margin-right: 0.2rem;
+}
+
+.main {
+  background: #d8b4f8;
+  min-height: 60vh;
+  padding-top: 20px;
+  padding-bottom: 60px;
 }
 
 .book-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   margin: 0 auto;
   gap: 20px;
-  max-width: 1200px;
+  max-width: 1400px;
   border: 2px solid #222;
   border-radius: 0.5rem;
   padding: 20px;
@@ -87,25 +201,58 @@ input[type="radio"] {
 .book-card {
   border-radius: 0.5rem;
   padding: 20px;
-  background: #a7d397;
+  background: #a076f9;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   gap: 10px;
   grid-template-columns: 2fr 1fr;
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
+  color: #0c134f;
 }
 
 .book-card > div {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  gap: 5px;
 }
 
 .book-card .title {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
 }
 
 .book-card .year {
-  color: rgb(107, 107, 107);
+  color: #40128b;
+  margin-top: 0.3rem;
   font-weight: 700;
+}
+
+.book-card button {
+  padding: 16px 12px;
+  width: 200px;
+  margin-top: 20px;
+  cursor: pointer;
+  border: none;
+  background: #1f441e;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  color: #cee6b4;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.book-card button:hover {
+  background: #224535;
+}
+
+.book-card button.not-Read {
+  background: #db2d43;
+  color: #fbf9af;
+}
+
+.book-card button.not-Read:hover {
+  background: #fa0559;
 }
