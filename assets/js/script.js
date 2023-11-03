@@ -46,6 +46,8 @@ function validateForm(validate) {
   const readError = document.querySelector("#readError");
 
   validate = true;
+  const now = new Date();
+  const currentYear = now.getFullYear();
 
   if (title.trim() === "") {
     titleError.style.color = "red";
@@ -85,6 +87,10 @@ function validateForm(validate) {
     validate = false;
   } else if (year.length < 4 || year.length > 4) {
     yearError.innerHTML = "Please, insert 4 digits";
+    yearError.style.color = "red";
+    validate = false;
+  } else if (year > currentYear) {
+    yearError.innerHTML = `Please, insert a date less then ${currentYear}`;
     yearError.style.color = "red";
     validate = false;
   } else {
