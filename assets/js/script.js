@@ -146,12 +146,21 @@ function createBook(book) {
   <p class="author">By: ${book.author}</p>
   <p class="pages">Number of pages: ${book.pages}</p>
   </div>
-  <button class="button-read ${
+  <button id="button-${book.title}" class="${
     !book.read ? "not-Read" : ""
-  }"}>${book.readStatus()}</button>
+  } button-read"}>${book.readStatus()}</button>
   </article>`;
 
   bookContainer.innerHTML += bookCard;
+
+  // Encontra e adiciona o evento ao botao criado
+  const newButton = document.getElementById(`button-${book.title}`);
+
+  ["touchstart", "click"].forEach((userEvent) => {
+    newButton.addEventListener(userEvent, (event) => {
+      handleCheck(event);
+    });
+  });
 }
 
 form.addEventListener("submit", handleSubmit);
@@ -185,8 +194,14 @@ buttonCloseModal.addEventListener("click", closeModal);
 // button de read
 const buttonRead = document.querySelectorAll(".button-read");
 
-function handleCheck() {
-  buttonRead.classList.toggle("ativo");
+function handleCheck(event) {
+  const clickedButton = event.currentTarget;
+  clickedButton.classList.toggle("not-Read");
+  if (clickedButton.innerHTML === "Read") {
+    clickedButton.innerHTML = "Not read";
+  } else {
+    clickedButton.innerHTML = "Read";
+  }
 }
 
 buttonRead.forEach((item) => {
