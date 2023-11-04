@@ -264,6 +264,7 @@ function handleDelete(event) {
   const libraryJSON = localStorage.getItem(keyToUpdate);
 
   if (libraryJSON) {
+    // Verifica se o titulo do index é igual ao do titulo do elemento a ser deletado
     const bookIndex = myLibrary.findIndex((book) => book.title === element.id);
     console.log(bookIndex);
 
