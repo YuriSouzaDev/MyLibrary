@@ -277,3 +277,5 @@ function handleDelete(event) {
     }
   }
 }
+
+// Criar validacao para aceitar apans numeros mesmo  input text em year e pages

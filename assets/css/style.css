@@ -25,51 +25,10 @@
   justify-content: center;
 }
 
-.header::before {
-  content: "";
-  background: url("../img/books.png") no-repeat center center;
-  background-size: cover;
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  top: 320px;
-  left: calc((100% - 1400px) / 2 + 40px);
-}
-
 .header h1 {
   color: rgb(242, 242, 242);
   font-family: Griffy, Helvetica, sans-serif;
   font-size: 8rem;
-}
-
-.newBook {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: flex-end;
-  padding: 20px;
-}
-
-.newBook button {
-  padding: 16px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  font-size: 1rem;
-  font-weight: 700;
-  font-family: "Poppins", sans-serif;
-  border: none;
-  background: #5b0888;
-  border-radius: 0.4rem;
-  color: #e5cff7;
-  cursor: pointer;
-  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.7);
-  transition: 0.3s;
-}
-
-.newBook button:hover {
-  background: #713abe;
 }
 
 .modal {
@@ -191,10 +150,46 @@ input[type="radio"] {
 }
 
 .main {
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   background: #d8b4f8;
   min-height: 60vh;
+  padding: 0 20px;
   padding-top: 20px;
   padding-bottom: 60px;
+}
+
+.newBook {
+  max-width: 1400px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  width: 100%;
+}
+
+.newBook button {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  background: #5b0888;
+  border-radius: 0.4rem;
+  color: #e5cff7;
+  cursor: pointer;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.7);
+  transition: 0.3s;
+}
+
+.newBook button:hover {
+  background: #713abe;
 }
 
 .book-container {
@@ -277,4 +272,38 @@ input[type="radio"] {
 
 .book-card .delete:hover {
   background: #fcd269;
+}
+
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 6rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 5rem;
+  }
+
+  .newBook {
+    justify-content: center;
+  }
+
+  .book-container {
+    grid-template-columns: 1fr;
+  }
+
+  .book-card button {
+    width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 4rem;
+  }
+
+  .book-card button {
+    width: 120px;
+  }
 }
