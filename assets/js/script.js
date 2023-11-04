@@ -10,7 +10,7 @@ function handleSubmit(event) {
 }
 
 // Array de livros
-const myLibrary = [];
+let myLibrary = [];
 
 // Object Constructor dos livros
 const Book = function (title, author, pages, year) {
@@ -18,15 +18,6 @@ const Book = function (title, author, pages, year) {
   this.author = author;
   this.pages = pages;
   this.year = year;
-};
-
-// Prototype para verificar se já foi lido
-Book.prototype.readStatus = function () {
-  if (this.read) {
-    return "Read";
-  } else {
-    return "Not read";
-  }
 };
 
 // verifica se o titulo ja existe
@@ -163,17 +154,17 @@ function handleCheck(event) {
 function createBook(book) {
   const bookCard = `
   <article class="book-card">
-  <div>
-  <h2 class="title">${book.title}</h2>
-  <p class="year">${book.year}</p>
-  </div>
-  <div>
-  <p class="author">By: ${book.author}</p>
-  <p class="pages">Number of pages: ${book.pages}</p>
-  </div>
-  <button id="button-${book.title}" class="${
-    !book.read ? "not-Read" : ""
-  } button-read"}>${book.readStatus()}</button>
+    <div>
+      <h2 class="title">${book.title}</h2>
+      <p class="year">${book.year}</p>
+    </div>
+    <div>
+      <p class="author">By: ${book.author}</p>
+      <p class="pages">Number of pages: ${book.pages}</p>
+    </div>
+    <button class="${!book.read ? "not-Read" : ""} button-read">${
+    book.read ? "Read" : "Not Read"
+  }</button>
   </article>`;
 
   bookContainer.innerHTML += bookCard;
@@ -226,3 +217,19 @@ buttonRead.forEach((item) => {
 function saveToLocalStorage() {
   localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
 }
+
+// load from storage
+
+function loadFromLocalStorage() {
+  const keyToUpdate = "myLibrary";
+  const libraryJSON = localStorage.getItem(keyToUpdate);
+
+  if (libraryJSON) {
+    myLibrary = JSON.parse(libraryJSON);
+    myLibrary.forEach((book) => {
+      createBook(book);
+    });
+  }
+}
+
+loadFromLocalStorage();
