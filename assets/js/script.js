@@ -23,9 +23,9 @@ const Book = function (title, author, pages, year) {
 // Prototype para verificar se já foi lido
 Book.prototype.readStatus = function () {
   if (this.read) {
-    return "Já foi lido";
+    return "Read";
   } else {
-    return "Não foi lido";
+    return "Not read";
   }
 };
 
@@ -144,6 +144,18 @@ function addBookToLibrary() {
     myLibrary.push(newBook);
     form.reset();
     createBook(newBook);
+    saveToLocalStorage();
+  }
+}
+
+// evento para trocar o stattus de leitura
+function handleCheck(event) {
+  const clickedButton = event.currentTarget;
+  clickedButton.classList.toggle("not-Read");
+  if (clickedButton.innerHTML === "Read") {
+    clickedButton.innerHTML = "Not read";
+  } else {
+    clickedButton.innerHTML = "Read";
   }
 }
 
@@ -167,12 +179,10 @@ function createBook(book) {
   bookContainer.innerHTML += bookCard;
 
   // Encontra e adiciona o evento ao botao criado
-  const newButton = document.getElementById(`button-${book.title}`);
+  const buttonRead = document.querySelectorAll(".button-read");
 
-  ["touchstart", "click"].forEach((userEvent) => {
-    newButton.addEventListener(userEvent, (event) => {
-      handleCheck(event);
-    });
+  buttonRead.forEach((item) => {
+    item.addEventListener("click", handleCheck);
   });
 }
 
@@ -197,6 +207,7 @@ buttonNewBook.addEventListener("click", handleModal);
 // Fecha o modal do form
 function closeModal() {
   modal.style.display = "none";
+  form.reset();
 
   // desbloqueia o scroll ao abrir o modal
   document.body.classList.remove("scroll-lock");
@@ -207,20 +218,11 @@ buttonCloseModal.addEventListener("click", closeModal);
 // button de read
 const buttonRead = document.querySelectorAll(".button-read");
 
-function handleCheck(event) {
-  const clickedButton = event.currentTarget;
-  clickedButton.classList.toggle("not-Read");
-  if (clickedButton.innerHTML === "Read") {
-    clickedButton.innerHTML = "Not read";
-  } else {
-    clickedButton.innerHTML = "Read";
-  }
-}
-
 buttonRead.forEach((item) => {
-  ["touchstart", "click"].forEach((userEvent) => {
-    item.addEventListener(userEvent, (event) => {
-      handleCheck(event);
-    });
-  });
+  item.addEventListener("click", handleCheck);
 });
+
+// save local storage
+function saveToLocalStorage() {
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+}
