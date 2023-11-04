@@ -240,18 +240,21 @@ input[type="radio"] {
   font-weight: 700;
 }
 
-.book-card .button-read {
+.book-card button {
   padding: 16px 12px;
   width: 200px;
   margin-top: 20px;
   cursor: pointer;
   border: none;
-  background: #1f441e;
-  font-size: 1rem;
-  font-family: "Poppins", sans-serif;
-  color: #cee6b4;
   font-weight: 500;
   transition: 0.3s;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.book-card .button-read {
+  background: #1f441e;
+  color: #cee6b4;
 }
 
 .book-card .button-read:hover {
@@ -265,4 +268,12 @@ input[type="radio"] {
 
 .book-card .button-read.not-Read:hover {
   background: #fa0559;
+}
+
+.book-card .delete {
+  background: #ffcd4b;
+}
+
+.book-card .delete:hover {
+  background: #fcd269;
 }

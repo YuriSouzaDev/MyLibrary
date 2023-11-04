@@ -153,7 +153,7 @@ function handleCheck(event) {
 // function para criação dos elementos
 function createBook(book) {
   const bookCard = `
-  <article class="book-card">
+  <article class="book-card" id="${book.title}">
     <div>
       <h2 class="title">${book.title}</h2>
       <p class="year">${book.year}</p>
@@ -162,18 +162,27 @@ function createBook(book) {
       <p class="author">By: ${book.author}</p>
       <p class="pages">Number of pages: ${book.pages}</p>
     </div>
-    <button class="${!book.read ? "not-Read" : ""} button-read">${
+    <div>
+      <button class="${!book.read ? "not-Read" : ""} button-read">${
     book.read ? "Read" : "Not Read"
   }</button>
+      <button class="delete">Delete</button>
+    </div>
+    
   </article>`;
 
   bookContainer.innerHTML += bookCard;
 
   // Encontra e adiciona o evento ao botao criado
   const buttonRead = document.querySelectorAll(".button-read");
+  const deleteButton = document.querySelectorAll(".delete");
 
   buttonRead.forEach((item) => {
     item.addEventListener("click", handleCheck);
+  });
+
+  deleteButton.forEach((item) => {
+    item.addEventListener("click", handleDelete);
   });
 }
 
@@ -233,3 +242,37 @@ function loadFromLocalStorage() {
 }
 
 loadFromLocalStorage();
+
+// Para deletar do DOM e do storage
+
+const deleteButton = document.querySelectorAll(".delete");
+
+deleteButton.forEach((item) => {
+  item.addEventListener("click", handleDelete);
+});
+
+function handleDelete(event) {
+  // Seleciona o elemento pai do livro
+  const element = event.currentTarget.parentElement.parentElement;
+
+  // Verifica se existe e o deleta
+  if (element) {
+    element.remove();
+  }
+
+  const keyToUpdate = "myLibrary";
+  const libraryJSON = localStorage.getItem(keyToUpdate);
+
+  if (libraryJSON) {
+    const bookIndex = myLibrary.findIndex((book) => book.title === element.id);
+    console.log(bookIndex);
+
+    if (bookIndex !== -1) {
+      // Remova o livro do array
+      myLibrary.splice(bookIndex, 1);
+
+      // Atualize os dados na localStorage
+      localStorage.setItem(keyToUpdate, JSON.stringify(myLibrary));
+    }
+  }
+}
